@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  vars:
+  tasks:
+  - name: Ensure telnet is removed
+    yum:
+      name: telnet
+      state: absent
+  - name: Ensure FTP is removed
+    yum:
+      name: ftp
+      state: absent
+  - name: Ensure firewalld is installed
+    yum:
+      name: firewalld
+      state: present
+  - name: Enable service firewalld
+    service:
+      name: firewalld
+      enabled: "yes"
+      state: "started"
